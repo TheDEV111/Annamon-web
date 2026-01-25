@@ -10,11 +10,11 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Anamon",
     description: "Collect, trade, and explore unique Anamons in the ultimate digital card marketplace.",
-    url: "https://anamon.io", // Replace with your actual domain when deployed
+    url: "https://anamon.io",
     siteName: "Anamon",
     images: [
       {
-        url: "/thumbnail-image.png", // Image from /public folder
+        url: "https://anamon.io/thumbnail-image.png", // Must be absolute URL
         width: 1200,
         height: 630,
         alt: "Anamon - Digital Card Marketplace",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: "summary_large_image", // Large image preview
     title: "Anamon",
     description: "Collect, trade, and explore unique Anamons in the ultimate digital card marketplace.",
-    images: ["/thumbnail-image.png"],
+    images: ["https://anamon.io/thumbnail-image.png"], // Must be absolute URL
   },
   
   // Additional SEO metadata
