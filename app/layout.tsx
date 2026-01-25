@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  // Basic metadata - appears in browser tab and search results
+  // Required for proper URL resolution
+  metadataBase: new URL("https://anamon.io"),
+  
+  // Basic metadata
   title: "Anamon",
   description: "Collect, trade, and explore unique Anamons in the ultimate digital card marketplace.",
-  
   
   openGraph: {
     title: "Anamon",
@@ -14,9 +16,9 @@ export const metadata: Metadata = {
     siteName: "Anamon",
     images: [
       {
-        url: "https://anamon.io/thumbnail-image.png", // Must be absolute URL
-        width: 1200,
-        height: 630,
+        url: "/thumbnail-image.png",
+        width: 1889,
+        height: 878,
         alt: "Anamon - Digital Card Marketplace",
       },
     ],
@@ -24,15 +26,13 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   
-  // Twitter/X metadata - optimized for Twitter cards
   twitter: {
-    card: "summary_large_image", // Large image preview
+    card: "summary_large_image",
     title: "Anamon",
     description: "Collect, trade, and explore unique Anamons in the ultimate digital card marketplace.",
-    images: ["https://anamon.io/thumbnail-image.png"], // Must be absolute URL
+    images: ["/thumbnail-image.png"],
   },
   
-  // Additional SEO metadata
   keywords: ["Anamon", "digital cards", "collectibles", "marketplace", "trading"],
   authors: [{ name: "Anamon Team" }],
   robots: "index, follow",
