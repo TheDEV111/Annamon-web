@@ -1,5 +1,6 @@
 import PacksHeroCarousel from "../../components/PacksHeroCarousel";
 import PacksFilter from "../../components/PacksFilter";
+import PacksGrid from "../../components/PacksGrid";
 
 export default function PacksPage() {
   return (
@@ -10,8 +11,13 @@ export default function PacksPage() {
       </section>
 
       {/* Filter Buttons */}
-      <section className="mb-8 sm:mb-10 lg:mb-12">
+      <section className="mb-6 sm:mb-8">
         <PacksFilter />
+      </section>
+
+      {/* Packs Grid Section */}
+      <section>
+        <PacksGrid />
       </section>
     </div>
   );
