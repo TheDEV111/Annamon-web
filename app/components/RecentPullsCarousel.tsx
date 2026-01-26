@@ -96,7 +96,7 @@ export default function RecentPullsCarousel() {
 
   return (
     <div 
-      className="w-full overflow-hidden rounded-[10px] sm:rounded-[12px] md:rounded-[14px] border border-[#2A2A2A] bg-[#1D1D1D] h-[320px] sm:h-[360px] md:h-[400px] lg:h-[420px] xl:h-[460px] 2xl:h-[480px] p-3 sm:p-4 md:p-[18px] lg:p-5"
+      className="w-full overflow-hidden rounded-[10px] sm:rounded-[12px] md:rounded-[14px] border border-[#2A2A2A] bg-[#1D1D1D] h-[280px] sm:h-[310px] md:h-[340px] lg:h-[360px] p-3 sm:p-4 md:p-[18px] lg:p-5"
     >
       <Carousel
         opts={{
