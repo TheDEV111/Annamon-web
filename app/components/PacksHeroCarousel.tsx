@@ -49,7 +49,7 @@ export default function PacksHeroCarousel() {
         {/* Content wrapper - 35/65 split */}
         <div className="flex h-full">
           {/* Left Side - 35% - Text Content */}
-          <div className="w-[45%] sm:w-[40%] md:w-[38%] lg:w-[35%] h-full flex flex-col justify-center px-3 sm:px-5 md:px-8 lg:px-12 xl:px-16">
+          <div className="w-[45%] sm:w-[40%] md:w-[38%] lg:w-[38%] xl:w-[40%] 2xl:w-[42%] h-full flex flex-col justify-center px-3 sm:px-5 md:px-8 lg:px-10 xl:px-10 2xl:px-12">
             {/* Title */}
             <h2 className="text-white font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] leading-tight mb-2 sm:mb-3 md:mb-4">
               {packsData[activeSlide].title}
