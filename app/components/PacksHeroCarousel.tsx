@@ -1,0 +1,118 @@
+"use client";
+
+import Image from "next/image";
+import { useState } from "react";
+
+// Mock data for carousel slides
+const packsData = [
+  {
+    id: 1,
+    title: "STANDARD PACK",
+    description: "Contains 5 Digital Standard Anamon Play Cards",
+    price: "$20",
+    buttonText: "RIP PACK",
+  },
+  {
+    id: 2,
+    title: "STANDARD PACK",
+    description: "Contains 5 Digital Standard Anamon Play Cards",
+    price: "$20",
+    buttonText: "RIP PACK",
+  },
+  {
+    id: 3,
+    title: "STANDARD PACK",
+    description: "Contains 5 Digital Standard Anamon Play Cards",
+    price: "$20",
+    buttonText: "RIP PACK",
+  },
+];
+
+export default function PacksHeroCarousel() {
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  return (
+    <div className="w-full">
+      {/* Section Title */}
+      <h1 className="text-white font-semibold text-2xl sm:text-3xl lg:text-4xl mb-4 sm:mb-6">
+        Packs
+      </h1>
+
+      {/* Main Carousel Container */}
+      <div 
+        className="relative w-full h-[180px] sm:h-[220px] md:h-[260px] lg:h-[301px] xl:h-[340px] 2xl:h-[380px] rounded-[14px] border border-[#2A2A2A] overflow-hidden"
+        style={{ 
+          background: "#242424",
+          boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.08)"
+        }}
+      >
+        {/* Content wrapper - 35/65 split */}
+        <div className="flex h-full">
+          {/* Left Side - 35% - Text Content */}
+          <div className="w-[45%] sm:w-[40%] md:w-[38%] lg:w-[35%] h-full flex flex-col justify-center px-3 sm:px-5 md:px-8 lg:px-12 xl:px-16">
+            {/* Title */}
+            <h2 className="text-white font-semibold text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] leading-tight mb-2 sm:mb-3 md:mb-4">
+              {packsData[activeSlide].title}
+            </h2>
+            
+            {/* Description */}
+            <p className="text-[#939BAA] text-xs sm:text-sm md:text-base font-normal leading-relaxed mb-4 sm:mb-6 md:mb-8 max-w-[280px] sm:max-w-[320px] md:max-w-[400px]">
+              {packsData[activeSlide].description}
+            </p>
+            
+            {/* Price and Button Row */}
+            <div className="flex items-center gap-2 sm:gap-3 md:gap-4">
+              {/* Price */}
+              <span className="text-white font-semibold text-xl sm:text-2xl md:text-[32px]">
+                {packsData[activeSlide].price}
+              </span>
+              
+              {/* RIP PACK Button */}
+              <button 
+                className="flex items-center justify-center gap-2 px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-[14px] text-white font-semibold text-sm sm:text-base transition-opacity hover:opacity-90"
+                style={{ background: "linear-gradient(90deg, #B71959 0%, #E04548 100%)" }}
+              >
+                <span>{packsData[activeSlide].buttonText}</span>
+                <Image
+                  src="/move-right 1.svg"
+                  alt="Arrow"
+                  width={24}
+                  height={24}
+                  className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6"
+                />
+              </button>
+            </div>
+          </div>
+          
+          {/* Right Side - 65% - Art Image with diagonal edge */}
+          <div className="absolute right-0 top-0 w-[60%] sm:w-[62%] md:w-[65%] lg:w-[68%] h-full">
+            <Image
+              src="/Art.svg"
+              alt="Pack Art"
+              fill
+              className="object-cover object-left"
+              priority
+            />
+          </div>
+        </div>
+        
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-4 sm:bottom-5 md:bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1 sm:gap-1.5">
+          {packsData.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setActiveSlide(index)}
+              className={`h-[5px] sm:h-[6px] md:h-[7px] rounded-full transition-all duration-300 ${
+                index === activeSlide 
+                  ? "w-[40px] sm:w-[48px] md:w-[53px]" 
+                  : "w-[18px] sm:w-[22px] md:w-[25px] bg-[#9CA3AF]"
+              }`}
+              style={index === activeSlide ? { background: "linear-gradient(90deg, #B71959 0%, #E04548 100%)" } : {}}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}

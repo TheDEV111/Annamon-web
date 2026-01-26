@@ -1,10 +1,18 @@
+import PacksHeroCarousel from "../../components/PacksHeroCarousel";
+import PacksFilter from "../../components/PacksFilter";
+
 export default function PacksPage() {
   return (
-    <div className="flex-1 flex items-center justify-center min-h-screen">
-      <div className="text-center">
-        <h1 className="text-6xl font-bold text-gray-300 mb-4">404</h1>
-        <p className="text-xl text-gray-500">Packs - Coming Soon</p>
-      </div>
+    <div className="min-h-screen pt-6 sm:pt-8 lg:pt-10 px-4 sm:px-6 lg:px-8 xl:px-10 2xl:px-12 pb-4 sm:pb-6 lg:pb-8 xl:pb-10 2xl:pb-12">
+      {/* Hero Carousel Section */}
+      <section className="mb-6 sm:mb-8 lg:mb-10">
+        <PacksHeroCarousel />
+      </section>
+
+      {/* Filter Buttons */}
+      <section className="mb-8 sm:mb-10 lg:mb-12">
+        <PacksFilter />
+      </section>
     </div>
   );
 }
