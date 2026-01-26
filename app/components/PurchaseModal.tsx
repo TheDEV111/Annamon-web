@@ -18,6 +18,7 @@ interface PurchaseModalProps {
 }
 
 type PaymentMethod = "card" | "wallet";
+type Currency = "USDC" | "USDT";
 
 interface FormData {
   cardNumber: string;
@@ -31,11 +32,18 @@ interface FormData {
   saveInfo: boolean;
 }
 
+interface WalletBalance {
+  USDC: number;
+  USDT: number;
+}
+
 const SERVICE_FEE = 1.94;
 const POINTS_PER_PURCHASE = 2000;
 
 export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalProps) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
+  const [selectedCurrency, setSelectedCurrency] = useState<Currency>("USDC");
+  const [walletBalance] = useState<WalletBalance>({ USDC: 0, USDT: 0 });
   const [formData, setFormData] = useState<FormData>({
     cardNumber: "",
     expiryMonth: "",
@@ -50,6 +58,9 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
 
   const subtotal = pack.price * pack.quantity;
   const total = subtotal + SERVICE_FEE;
+  const totalWalletBalance = walletBalance.USDC + walletBalance.USDT;
+  const selectedBalance = walletBalance[selectedCurrency];
+  const amountNeeded = Math.max(0, subtotal - selectedBalance);
 
   const handleInputChange = useCallback(
     (field: keyof FormData) => (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,83 +117,87 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
           {/* Left Side - Payment Form */}
           <div className="flex-1 flex flex-col gap-5">
             {/* Payment Method */}
-            <div className="flex flex-col gap-3">
-              <label className="text-[#939BAA] text-base font-medium">
+            <div className="flex flex-col gap-4">
+              <label className="text-white text-lg font-medium">
                 Payment Method
               </label>
-              <div className="flex flex-col gap-2.5">
-                {/* Card Option */}
+              <div className="flex flex-col gap-3">
+                {/* Credit Card Option */}
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("card")}
-                  className={`w-full h-[50px] px-3.5 flex items-center gap-2.5 rounded-xl transition-all ${
+                  className={`w-full h-[60px] px-4 flex items-center gap-3 rounded-[14px] transition-all ${
                     paymentMethod === "card"
                       ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                       : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
                   }`}
                 >
                   {/* Radio */}
-                  <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                    paymentMethod === "card" ? "border-[#E04548]" : "border-[#D1D5DB]"
+                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                    paymentMethod === "card" ? "border-[#E04548]" : "border-[#2A2A2A]"
                   }`}>
                     {paymentMethod === "card" && (
-                      <div className="w-2 h-2 rounded-full bg-[#E04548]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-[#E04548]" />
                     )}
                   </div>
                   <Image src="/Card.svg" alt="Card" width={20} height={20} />
-                  <span className="text-white text-sm font-medium">Card</span>
+                  <span className="text-white text-base font-medium">Credit card</span>
                 </button>
 
                 {/* Wallet Option */}
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("wallet")}
-                  className={`w-full h-[50px] px-3.5 flex items-center justify-between rounded-xl transition-all ${
+                  className={`w-full h-[60px] px-4 flex items-center justify-between rounded-[14px] transition-all ${
                     paymentMethod === "wallet"
                       ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                       : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
                   }`}
                 >
-                  <div className="flex items-center gap-2.5">
+                  <div className="flex items-center gap-3">
                     {/* Radio */}
-                    <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${
-                      paymentMethod === "wallet" ? "border-[#E04548]" : "border-[#D1D5DB]"
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
+                      paymentMethod === "wallet" ? "border-[#E04548]" : "border-[#2A2A2A]"
                     }`}>
                       {paymentMethod === "wallet" && (
-                        <div className="w-2 h-2 rounded-full bg-[#E04548]" />
+                        <div className="w-2.5 h-2.5 rounded-full bg-[#E04548]" />
                       )}
                     </div>
                     <Image src="/wallet.svg" alt="Wallet" width={20} height={20} />
-                    <span className="text-white text-sm font-medium">Wallet</span>
+                    <span className="text-white text-base font-medium">Wallet</span>
                   </div>
-                  <span className="text-[#939BAA] text-sm font-medium">$0.00</span>
+                  <span className="text-[#939BAA] text-base font-medium">{formatPrice(totalWalletBalance)}</span>
                 </button>
               </div>
             </div>
 
-            {/* Apple Pay / Google Pay */}
-            <div className="flex flex-col gap-3">
-              <div className="flex gap-2">
-                {/* Apple Pay */}
-                <button
-                  type="button"
-                  className="flex-1 h-[44px] bg-black rounded-xl flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
-                >
-                  <Image src="/Applce-Icon.svg" alt="Apple" width={20} height={20} />
-                  <span className="text-white text-sm font-medium">Pay</span>
-                </button>
+            {/* Conditional Form Rendering */}
+            {paymentMethod === "card" ? (
+              /* Card Payment Form */
+              <div key="card-form" className="flex flex-col gap-5 animate-fade-slide-in">
+                {/* Apple Pay / Google Pay */}
+                <div className="flex flex-col gap-3">
+                  <div className="flex gap-2">
+                    {/* Apple Pay */}
+                    <button
+                      type="button"
+                      className="flex-1 h-[44px] bg-black rounded-xl flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+                    >
+                      <Image src="/Applce-Icon.svg" alt="Apple" width={20} height={20} />
+                      <span className="text-white text-sm font-medium">Pay</span>
+                    </button>
 
-                {/* Google Pay */}
-                <button
-                  type="button"
-                  className="flex-1 h-[44px] bg-white rounded-xl border-2 border-[#2A2A2A] flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
-                >
-                  <Image src="/google-Icon.svg" alt="Google" width={15} height={15} />
-                  <span className="text-[#939BAA] text-sm font-medium">Pay</span>
-                </button>
-              </div>
-              <p className="text-center text-[#939BAA] text-xs">or</p>
-            </div>
+                    {/* Google Pay */}
+                    <button
+                      type="button"
+                      className="flex-1 h-[44px] bg-white rounded-xl border-2 border-[#2A2A2A] flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+                    >
+                      <Image src="/google-Icon.svg" alt="Google" width={15} height={15} />
+                      <span className="text-[#939BAA] text-sm font-medium">Pay</span>
+                    </button>
+                  </div>
+                  <p className="text-center text-[#939BAA] text-xs">or</p>
+                </div>
 
             {/* Card Information */}
             <div className="flex flex-col gap-3.5">
@@ -335,7 +350,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
               </div>
             </div>
 
-            {/* Confirm Button - Left Side */}
+            {/* Confirm Button - Card Payment */}
             <button
               type="button"
               className="w-full h-[47px] rounded-xl flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] shadow-[0px_3px_13px_rgba(221,65,73,0.30)] hover:opacity-90 transition-opacity"
@@ -344,6 +359,100 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                 Confirm Purchase of {formatPrice(total)}
               </span>
             </button>
+              </div>
+            ) : (
+              /* Wallet Payment Form */
+              <div key="wallet-form" className="flex flex-col gap-5 animate-fade-slide-in">
+                {/* Select Currency */}
+                <div className="flex flex-col gap-4">
+                  <label className="text-white text-base font-medium">
+                    Select Currency
+                  </label>
+                  <div className="flex gap-3">
+                    {/* USDC Option */}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCurrency("USDC")}
+                      className={`flex-1 h-[76px] px-4 flex items-center justify-between rounded-[14px] transition-all ${
+                        selectedCurrency === "USDC"
+                          ? "bg-[#E04548]/5 border-2 border-[#E04548]"
+                          : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {/* USDC Icon */}
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                          selectedCurrency === "USDC" ? "bg-[#E04548]" : "bg-[#2A2A2A]"
+                        }`}>
+                          <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="6" fill="#1D1D1D"/>
+                          </svg>
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <span className="text-white text-base font-medium">USDC</span>
+                          <span className="text-[#939BAA] text-xs font-medium">{formatPrice(walletBalance.USDC)}</span>
+                        </div>
+                      </div>
+                      {selectedCurrency === "USDC" && (
+                        <div className="w-5 h-5 rounded-full bg-[#E04548] flex items-center justify-center">
+                          <svg className="w-3 h-2.5" viewBox="0 0 12 10" fill="none">
+                            <path d="M1 5L4.5 8.5L11 1.5" stroke="#1D1D1D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      )}
+                    </button>
+
+                    {/* USDT Option */}
+                    <button
+                      type="button"
+                      onClick={() => setSelectedCurrency("USDT")}
+                      className={`flex-1 h-[76px] px-4 flex items-center justify-between rounded-[14px] transition-all ${
+                        selectedCurrency === "USDT"
+                          ? "bg-[#E04548]/5 border-2 border-[#E04548]"
+                          : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        {/* USDT Icon */}
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+                          selectedCurrency === "USDT" ? "bg-[#E04548]" : "bg-[#2A2A2A]"
+                        }`}>
+                          <svg className="w-4 h-4" viewBox="0 0 16 16" fill="none">
+                            <circle cx="8" cy="8" r="6" fill="#1D1D1D"/>
+                          </svg>
+                        </div>
+                        <div className="flex flex-col items-start">
+                          <span className="text-white text-base font-medium">USDT</span>
+                          <span className="text-[#939BAA] text-xs font-medium">{formatPrice(walletBalance.USDT)}</span>
+                        </div>
+                      </div>
+                      {selectedCurrency === "USDT" && (
+                        <div className="w-5 h-5 rounded-full bg-[#E04548] flex items-center justify-center">
+                          <svg className="w-3 h-2.5" viewBox="0 0 12 10" fill="none">
+                            <path d="M1 5L4.5 8.5L11 1.5" stroke="#1D1D1D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* Add Funds Section */}
+                <div className="flex flex-col gap-3 pt-8">
+                  <button
+                    type="button"
+                    className="w-full h-[60px] rounded-[14px] flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] border-2 border-[#2A2A2A] hover:opacity-90 transition-opacity"
+                  >
+                    <span className="text-white text-base font-medium">Add Funds</span>
+                  </button>
+                  {amountNeeded > 0 && (
+                    <p className="text-center text-[#6A7282] text-sm">
+                      Need {formatPrice(amountNeeded)} more {selectedCurrency}
+                    </p>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Right Side - Order Summary */}

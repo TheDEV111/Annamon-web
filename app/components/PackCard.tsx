@@ -42,7 +42,7 @@ export default function PackCard({ name, price, image }: PackCardProps) {
 
   return (
     <>
-      <div className="w-full h-[424px] bg-[#3E474C] rounded-[14px] border border-[#2A2A2A] overflow-hidden relative">
+      <div className="w-full h-106 bg-[#3E474C] rounded-[14px] border border-[#2A2A2A] overflow-hidden relative">
         {/* Pack Image - Clickable */}
         <button
           type="button"
@@ -55,19 +55,19 @@ export default function PackCard({ name, price, image }: PackCardProps) {
             alt={name}
             width={166}
             height={227}
-            className="w-[166px] h-[227px] object-contain"
+            className="w-41.5 h-56.75 object-contain"
             priority
           />
         </button>
 
         {/* Pack Info Overlay */}
-        <div className="absolute left-4 right-4 top-[224px] bg-[#1D1D1D] rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] px-5 pt-4 pb-2.5">
+        <div className="absolute left-4 right-4 top-56 bg-[#1D1D1D] rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] px-5 pt-4 pb-2.5">
           <p className="text-[#939BAA] text-xs font-medium">{name}</p>
           <p className="text-white text-lg font-semibold">{formattedPrice}</p>
         </div>
 
         {/* Bottom Section */}
-        <div className="absolute bottom-0 left-0 right-0 h-[112px] bg-[#1D1D1D] border-t border-[#2A2A2A]">
+        <div className="absolute bottom-0 left-0 right-0 h-28 bg-[#1D1D1D] border-t border-[#2A2A2A]">
           {/* Quantity Selector */}
           <div className="mx-4 mt-5 flex items-center justify-center gap-2.5 p-2.5 rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)]">
             <button
@@ -100,7 +100,7 @@ export default function PackCard({ name, price, image }: PackCardProps) {
           <button
             type="button"
             onClick={openModal}
-            className="mx-4 mt-2 w-[calc(100%-32px)] p-2.5 rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] hover:opacity-90 transition-opacity"
+            className="mx-4 mt-2 w-[calc(100%-32px)] p-2.5 rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] flex items-center justify-center bg-linear-to-r from-[#B71959] to-[#E04548] hover:opacity-90 transition-opacity"
           >
             <span className="text-white text-xs font-medium">Buy</span>
           </button>
