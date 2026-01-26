@@ -42,12 +42,12 @@ export default function PackCard({ name, price, image }: PackCardProps) {
 
   return (
     <>
-      <div className="w-full h-106 bg-[#3E474C] rounded-[14px] border border-[#2A2A2A] overflow-hidden relative">
+      <div className="w-full h-[320px] sm:h-[360px] md:h-[400px] lg:h-[424px] bg-[#3E474C] rounded-xl sm:rounded-[14px] border border-[#2A2A2A] overflow-hidden relative">
         {/* Pack Image - Clickable */}
         <button
           type="button"
           onClick={openModal}
-          className="w-full flex justify-center pt-5 cursor-pointer hover:opacity-90 transition-opacity"
+          className="w-full flex justify-center pt-3 sm:pt-4 md:pt-5 cursor-pointer hover:opacity-90 transition-opacity touch-manipulation"
           aria-label={`View ${name} details`}
         >
           <Image
@@ -55,32 +55,32 @@ export default function PackCard({ name, price, image }: PackCardProps) {
             alt={name}
             width={166}
             height={227}
-            className="w-41.5 h-56.75 object-contain"
+            className="w-[100px] sm:w-[120px] md:w-[140px] lg:w-[166px] h-[137px] sm:h-[164px] md:h-[192px] lg:h-[227px] object-contain"
             priority
           />
         </button>
 
         {/* Pack Info Overlay */}
-        <div className="absolute left-4 right-4 top-56 bg-[#1D1D1D] rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] px-5 pt-4 pb-2.5">
-          <p className="text-[#939BAA] text-xs font-medium">{name}</p>
-          <p className="text-white text-lg font-semibold">{formattedPrice}</p>
+        <div className="absolute left-2 sm:left-3 md:left-4 right-2 sm:right-3 md:right-4 top-[140px] sm:top-[170px] md:top-[200px] lg:top-[224px] bg-[#1D1D1D] rounded-xl sm:rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] px-2.5 sm:px-3 md:px-4 lg:px-5 pt-2.5 sm:pt-3 md:pt-4 pb-2">
+          <p className="text-[#939BAA] text-[10px] sm:text-xs font-medium truncate">{name}</p>
+          <p className="text-white text-sm sm:text-base md:text-lg font-semibold">{formattedPrice}</p>
         </div>
 
         {/* Bottom Section */}
-        <div className="absolute bottom-0 left-0 right-0 h-28 bg-[#1D1D1D] border-t border-[#2A2A2A]">
+        <div className="absolute bottom-0 left-0 right-0 h-[88px] sm:h-[100px] md:h-[108px] lg:h-[112px] bg-[#1D1D1D] border-t border-[#2A2A2A]">
           {/* Quantity Selector */}
-          <div className="mx-4 mt-5 flex items-center justify-center gap-2.5 p-2.5 rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)]">
+          <div className="mx-2 sm:mx-3 md:mx-4 mt-3 sm:mt-4 md:mt-5 flex items-center justify-center gap-2 sm:gap-2.5 p-2 sm:p-2.5 rounded-xl sm:rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)]">
             <button
               type="button"
               onClick={decrement}
               disabled={quantity <= MIN_QUANTITY}
               aria-label="Decrease quantity"
-              className="w-4 h-4 flex items-center justify-center text-[#939BAA] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-5 h-5 sm:w-4 sm:h-4 flex items-center justify-center text-[#939BAA] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
             >
-              <Minus className="w-4 h-4" />
+              <Minus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
             <span 
-              className="flex-1 text-center text-[#939BAA] text-xs font-medium tabular-nums"
+              className="flex-1 text-center text-[#939BAA] text-[10px] sm:text-xs font-medium tabular-nums"
               aria-live="polite"
             >
               {quantity}
@@ -90,9 +90,9 @@ export default function PackCard({ name, price, image }: PackCardProps) {
               onClick={increment}
               disabled={quantity >= MAX_QUANTITY}
               aria-label="Increase quantity"
-              className="w-4 h-4 flex items-center justify-center text-[#939BAA] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-5 h-5 sm:w-4 sm:h-4 flex items-center justify-center text-[#939BAA] hover:text-white disabled:opacity-50 disabled:cursor-not-allowed transition-colors touch-manipulation"
             >
-              <Plus className="w-4 h-4" />
+              <Plus className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
             </button>
           </div>
 
@@ -100,9 +100,9 @@ export default function PackCard({ name, price, image }: PackCardProps) {
           <button
             type="button"
             onClick={openModal}
-            className="mx-4 mt-2 w-[calc(100%-32px)] p-2.5 rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] flex items-center justify-center bg-linear-to-r from-[#B71959] to-[#E04548] hover:opacity-90 transition-opacity"
+            className="mx-2 sm:mx-3 md:mx-4 mt-1.5 sm:mt-2 w-[calc(100%-16px)] sm:w-[calc(100%-24px)] md:w-[calc(100%-32px)] p-2 sm:p-2.5 rounded-xl sm:rounded-[14px] border border-[#2A2A2A] shadow-[0px_1px_2px_rgba(0,0,0,0.04),0px_2px_8px_rgba(0,0,0,0.08)] flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] hover:opacity-90 transition-opacity touch-manipulation"
           >
-            <span className="text-white text-xs font-medium">Buy</span>
+            <span className="text-white text-[10px] sm:text-xs font-medium">Buy</span>
           </button>
         </div>
       </div>
