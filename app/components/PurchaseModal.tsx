@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useState } from "react";
 import { X } from "lucide-react";
+import PurchaseSuccessModal from "./PurchaseSuccessModal";
 
 interface PackData {
   name: string;
@@ -38,12 +39,13 @@ interface WalletBalance {
 }
 
 const SERVICE_FEE = 1.94;
-const POINTS_PER_PURCHASE = 2000;
+const POINTS_PER_PURCHASE = 2500;
 
 export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalProps) {
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>("card");
   const [selectedCurrency, setSelectedCurrency] = useState<Currency>("USDC");
   const [walletBalance] = useState<WalletBalance>({ USDC: 0, USDT: 0 });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [formData, setFormData] = useState<FormData>({
     cardNumber: "",
     expiryMonth: "",
@@ -72,6 +74,31 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
   const handleCheckboxChange = useCallback(() => {
     setFormData((prev) => ({ ...prev, saveInfo: !prev.saveInfo }));
   }, []);
+
+  const handleConfirmPurchase = useCallback(() => {
+    // In a real app, this would process the payment
+    // For now, just show the success modal
+    setShowSuccessModal(true);
+  }, []);
+
+  const handleSuccessClose = useCallback(() => {
+    setShowSuccessModal(false);
+    onClose();
+  }, [onClose]);
+
+  const handleOpenPack = useCallback(() => {
+    // Navigate to pack opening experience
+    setShowSuccessModal(false);
+    onClose();
+    // TODO: Navigate to pack opening page
+  }, [onClose]);
+
+  const handleViewInventory = useCallback(() => {
+    // Navigate to inventory
+    setShowSuccessModal(false);
+    onClose();
+    // TODO: Navigate to inventory page
+  }, [onClose]);
 
   const formatPrice = (amount: number) =>
     new Intl.NumberFormat("en-US", {
@@ -352,6 +379,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
             {/* Confirm Button - Card Payment */}
             <button
               type="button"
+              onClick={handleConfirmPurchase}
               className="w-full h-[44px] sm:h-[47px] rounded-xl flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] shadow-[0px_3px_13px_rgba(221,65,73,0.30)] hover:opacity-90 transition-opacity touch-manipulation"
             >
               <span className="text-white text-sm font-medium">
@@ -513,6 +541,17 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
           </div>
         </div>
       </div>
+
+      {/* Purchase Success Modal */}
+      <PurchaseSuccessModal
+        isOpen={showSuccessModal}
+        onClose={handleSuccessClose}
+        pack={pack}
+        amountPaid={total}
+        pointsEarned={POINTS_PER_PURCHASE}
+        onOpenPack={handleOpenPack}
+        onViewInventory={handleViewInventory}
+      />
     </div>
   );
 }
