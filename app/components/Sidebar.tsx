@@ -67,6 +67,7 @@ export default function Sidebar() {
                   src={item.icon}
                   alt={item.name}
                   fill
+                  sizes="24px"
                   className={`object-contain ${isActive ? "brightness-0 invert" : ""}`}
                 />
               </div>
@@ -116,6 +117,7 @@ export default function Sidebar() {
                   src={social.icon}
                   alt={social.name}
                   fill
+                  sizes="24px"
                   className="object-contain"
                 />
               </div>

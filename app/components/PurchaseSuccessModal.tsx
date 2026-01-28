@@ -46,14 +46,14 @@ export default function PurchaseSuccessModal({
 
       {/* Modal */}
       <div 
-        className="relative w-full sm:max-w-[448px] h-auto max-h-[95vh] sm:max-h-[90vh] overflow-y-auto bg-background rounded-t-3xl sm:rounded-3xl border border-border shadow-[0px_4px_12px_rgba(0,0,0,0.10),0px_20px_60px_rgba(0,0,0,0.15)] animate-fade-slide-in"
+        className="relative w-full sm:max-w-md h-auto max-h-[95vh] sm:max-h-[90vh] overflow-y-auto bg-background rounded-t-3xl sm:rounded-3xl border border-border shadow-[0px_4px_12px_rgba(0,0,0,0.10),0px_20px_60px_rgba(0,0,0,0.15)] animate-fade-slide-in"
         role="dialog"
         aria-modal="true"
         aria-labelledby="success-modal-title"
       >
         <div className="flex flex-col items-center px-6 sm:px-12 py-10 sm:py-12 gap-6">
           {/* Success Icon */}
-          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#10B981]/[0.08] rounded-3xl shadow-[0px_8px_24px_#42DE80] flex items-center justify-center">
+          <div className="w-20 h-20 sm:w-24 sm:h-24 bg-[#10B981]/8 rounded-3xl shadow-[0px_8px_24px_#42DE80] flex items-center justify-center">
             <Image
               src="/purchase-success.svg"
               alt="Success"
@@ -83,7 +83,7 @@ export default function PurchaseSuccessModal({
               alt={pack.name}
               width={75}
               height={102}
-              className="w-16 h-[88px] sm:w-[75px] sm:h-[102px] object-contain"
+              className="w-16 h-22 sm:w-18.75 sm:h-25.5 object-contain"
             />
           </div>
 
@@ -94,7 +94,7 @@ export default function PurchaseSuccessModal({
               <span className="text-muted-foreground text-base leading-6">
                 Amount Paid
               </span>
-              <span className="text-foreground text-lg font-medium leading-[27px]">
+              <span className="text-foreground text-lg font-medium leading-6.75">
                 {formatPrice(amountPaid)}
               </span>
             </div>
@@ -104,7 +104,7 @@ export default function PurchaseSuccessModal({
               <span className="text-muted-foreground text-base leading-6">
                 Points Earned
               </span>
-              <span className="text-[#10B981] text-lg font-medium leading-[27px]">
+              <span className="text-[#10B981] text-lg font-medium leading-6.75">
                 {formatPoints(pointsEarned)}
               </span>
             </div>
@@ -116,7 +116,7 @@ export default function PurchaseSuccessModal({
             <button
               type="button"
               onClick={onOpenPack}
-              className="w-full h-14 rounded-[14px] bg-gradient-to-r from-[#B71959] to-[#E04548] flex items-center justify-center hover:opacity-90 transition-opacity touch-manipulation"
+              className="w-full h-14 rounded-[14px] bg-linear-to-r from-[#B71959] to-[#E04548] flex items-center justify-center hover:opacity-90 transition-opacity touch-manipulation"
             >
               <span className="text-foreground text-base font-medium leading-6 tracking-[2px]">
                 OPEN PACK NOW
@@ -127,7 +127,7 @@ export default function PurchaseSuccessModal({
             <button
               type="button"
               onClick={onViewInventory}
-              className="w-full h-[60px] rounded-[14px] bg-background border-2 border-border flex items-center justify-center hover:border-[#3A3A3A] transition-colors touch-manipulation"
+              className="w-full h-15 rounded-[14px] bg-background border-2 border-border flex items-center justify-center hover:border-[#3A3A3A] transition-colors touch-manipulation"
             >
               <span className="text-muted-foreground text-base font-medium leading-6">
                 View Inventory

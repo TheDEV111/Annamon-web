@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import PrivyAuthProvider from "@/components/providers/privy-provider";
+import { AuthModalProvider } from "@/contexts/AuthModalContext";
+import LoginModal from "@/app/components/LoginModal";
 
 export const metadata: Metadata = {
   // Required for proper URL resolution
@@ -52,7 +55,12 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
-        {children}
+        <PrivyAuthProvider>
+          <AuthModalProvider>
+            {children}
+            <LoginModal />
+          </AuthModalProvider>
+        </PrivyAuthProvider>
       </body>
     </html>
   );

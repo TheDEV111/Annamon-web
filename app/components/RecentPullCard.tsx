@@ -129,6 +129,7 @@ export default function RecentPullCard({
               src={packImage}
               alt={packName}
               fill
+              sizes="24px"
               className="object-cover"
             />
           </div>

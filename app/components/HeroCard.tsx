@@ -1,7 +1,26 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePrivy } from "@privy-io/react-auth";
+import { useAuthModal } from "@/contexts/AuthModalContext";
+import { useRouter } from "next/navigation";
 
 export default function HeroCard() {
+  const { authenticated } = usePrivy();
+  const { openAuthModal } = useAuthModal();
+  const router = useRouter();
+
+  const handlePlayForFree = () => {
+    if (authenticated) {
+      // User is logged in, navigate to game/packs
+      router.push("/packs");
+    } else {
+      // User not logged in, show auth modal
+      openAuthModal();
+    }
+  };
+
   return (
     <div className="w-full">
       {/* Hero Card Container */}
@@ -44,8 +63,8 @@ export default function HeroCard() {
             <Link
               href="/lore"
               className="flex items-center justify-center
-                         w-full sm:w-[150px] lg:w-full xl:w-[168px] 
-                         h-[44px] lg:h-[48px] xl:h-[50px]
+                         w-full sm:w-37.5 lg:w-full xl:w-42 
+                         h-11 lg:h-12 xl:h-12.5
                          border border-[#2A2A2A] bg-transparent
                          rounded-[14px] px-4 gap-2
                          text-white font-medium text-sm lg:text-base
@@ -55,11 +74,11 @@ export default function HeroCard() {
             </Link>
 
             {/* Play For Free Button - Gradient */}
-            <Link
-              href="/login"
+            <button
+              onClick={handlePlayForFree}
               className="flex items-center justify-center gap-2
-                         w-full sm:w-[150px] lg:w-full xl:w-[168px] 
-                         h-[44px] lg:h-[48px] xl:h-[50px]
+                         w-full sm:w-37.5 lg:w-full xl:w-42 
+                         h-11 lg:h-12 xl:h-12.5
                          bg-linear-to-r from-[#B71959] to-[#E04548]
                          rounded-[14px] px-4
                          text-white font-medium text-sm lg:text-base
@@ -79,23 +98,24 @@ export default function HeroCard() {
                   d="M17 8l4 4m0 0l-4 4m4-4H3" 
                 />
               </svg>
-            </Link>
+            </button>
           </div>
         </div>
 
         {/* Right Image Side - 60% on desktop */}
         <div className="relative w-full lg:w-[60%] 
-                        h-[200px] sm:h-[240px] md:h-[280px] lg:h-[380px] xl:h-[400px] 2xl:h-[430px]
+                        h-50 sm:h-60 md:h-70 lg:h-95 xl:h-100 2xl:h-107.5
                         order-1 lg:order-2">
           <Image
             src="/Twitter Art 6 1.png"
             alt="Anamon Characters"
             fill
+            sizes="(max-width: 1024px) 100vw, 60vw"
             className="object-cover object-center"
             priority
           />
           {/* Gradient overlay for mobile - blends image into content */}
-          <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-[#1D1D1D] to-transparent lg:hidden" />
+          <div className="absolute inset-x-0 bottom-0 h-16 bg-linear-to-t from-[#1D1D1D] to-transparent lg:hidden" />
         </div>
       </div>
     </div>

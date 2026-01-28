@@ -40,7 +40,7 @@ export default function PacksHeroCarousel() {
 
       {/* Main Carousel Container */}
       <div 
-        className="relative w-full h-[160px] sm:h-[200px] md:h-[260px] lg:h-[301px] xl:h-[340px] 2xl:h-[380px] rounded-xl sm:rounded-[14px] border border-[#2A2A2A] overflow-hidden"
+        className="relative w-full h-40 sm:h-50 md:h-65 lg:h-75.25 xl:h-85 2xl:h-95 rounded-xl sm:rounded-[14px] border border-[#2A2A2A] overflow-hidden"
         style={{ 
           background: "#242424",
           boxShadow: "0px 1px 2px rgba(0, 0, 0, 0.04), 0px 2px 8px rgba(0, 0, 0, 0.08)"
@@ -90,6 +90,7 @@ export default function PacksHeroCarousel() {
               src="/Art.svg"
               alt="Pack Art"
               fill
+              sizes="(max-width: 640px) 50vw, (max-width: 1024px) 62vw, 68vw"
               className="object-cover object-left"
               priority
             />
@@ -102,10 +103,10 @@ export default function PacksHeroCarousel() {
             <button
               key={index}
               onClick={() => setActiveSlide(index)}
-              className={`h-[5px] sm:h-[6px] md:h-[7px] rounded-full transition-all duration-300 ${
+              className={`h-1.25 sm:h-1.5 md:h-1.75 rounded-full transition-all duration-300 ${
                 index === activeSlide 
-                  ? "w-[40px] sm:w-[48px] md:w-[53px]" 
-                  : "w-[18px] sm:w-[22px] md:w-[25px] bg-[#9CA3AF]"
+                  ? "w-10 sm:w-12 md:w-13.25" 
+                  : "w-4.5 sm:w-5.5 md:w-6.25 bg-[#9CA3AF]"
               }`}
               style={index === activeSlide ? { background: "linear-gradient(90deg, #B71959 0%, #E04548 100%)" } : {}}
               aria-label={`Go to slide ${index + 1}`}

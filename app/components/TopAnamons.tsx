@@ -265,6 +265,7 @@ export default function TopAnamons() {
                           src="/Container.png"
                           alt={item.name}
                           fill
+                          sizes="40px"
                           className="object-cover"
                         />
                       </div>
@@ -331,6 +332,7 @@ export default function TopAnamons() {
                         width={80}
                         height={32}
                         className="object-contain"
+                        style={{ height: 'auto' }}
                       />
                     </div>
                   </td>
@@ -353,6 +355,7 @@ export default function TopAnamons() {
                       src="/Container.png"
                       alt={item.name}
                       fill
+                      sizes="40px"
                       className="object-cover"
                     />
                   </div>
@@ -364,6 +367,7 @@ export default function TopAnamons() {
                   width={60}
                   height={24}
                   className="object-contain"
+                  style={{ height: 'auto' }}
                 />
               </div>
 

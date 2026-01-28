@@ -128,7 +128,7 @@ export default function CollectorLeaderboard() {
                 onClick={() => setSelectedPeriod(period)}
                 className={`px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-medium rounded-full transition-colors ${
                   selectedPeriod === period
-                    ? "bg-gradient-to-r from-[#B71959] to-[#E04548] text-white"
+                    ? "bg-linear-to-r from-[#B71959] to-[#E04548] text-white"
                     : "text-[#939BAA] hover:text-white"
                 }`}
               >
@@ -140,7 +140,7 @@ export default function CollectorLeaderboard() {
           {/* Right side - See all button */}
           <Link
             href="/collectors"
-            className="flex items-center gap-2 bg-gradient-to-r from-[#B71959] to-[#E04548] text-white px-4 py-2 rounded-[14px] text-sm font-medium hover:opacity-90 transition-opacity w-fit"
+            className="flex items-center gap-2 bg-linear-to-r from-[#B71959] to-[#E04548] text-white px-4 py-2 rounded-[14px] text-sm font-medium hover:opacity-90 transition-opacity w-fit"
           >
             See all
             <svg
@@ -189,6 +189,7 @@ export default function CollectorLeaderboard() {
                           src="/Container.png"
                           alt={item.name}
                           fill
+                          sizes="40px"
                           className="object-cover"
                         />
                       </div>
@@ -240,6 +241,7 @@ export default function CollectorLeaderboard() {
                     src="/Container.png"
                     alt={item.name}
                     fill
+                    sizes="40px"
                     className="object-cover"
                   />
                 </div>

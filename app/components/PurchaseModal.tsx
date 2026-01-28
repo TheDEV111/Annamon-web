@@ -119,13 +119,13 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
 
       {/* Modal - Full screen on mobile, centered on larger screens */}
       <div 
-        className="relative w-full sm:max-w-[600px] lg:max-w-[856px] h-[92vh] sm:h-auto sm:max-h-[90vh] overflow-y-auto bg-[#1D1D1D] rounded-t-2xl sm:rounded-[20px] border border-[#2A2A2A] shadow-[0px_3px_10px_rgba(0,0,0,0.10),0px_17px_50px_rgba(0,0,0,0.15)] animate-fade-slide-in"
+        className="relative w-full sm:max-w-150 lg:max-w-214 h-[92vh] sm:h-auto sm:max-h-[90vh] overflow-y-auto bg-[#1D1D1D] rounded-t-2xl sm:rounded-4xl border border-[#2A2A2A] shadow-[0px_3px_10px_rgba(0,0,0,0.10),0px_17px_50px_rgba(0,0,0,0.15)] animate-fade-slide-in"
         role="dialog"
         aria-modal="true"
         aria-labelledby="modal-title"
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-4 sm:px-5 md:px-7 h-[60px] sm:h-[74px] bg-[#1D1D1D] border-b border-[#2A2A2A]">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-4 sm:px-5 md:px-7 h-15 sm:h-18.5 bg-[#1D1D1D] border-b border-[#2A2A2A]">
           <h2 id="modal-title" className="text-white text-lg sm:text-xl font-medium">
             Buy a pack
           </h2>
@@ -152,7 +152,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("card")}
-                  className={`w-full h-[56px] sm:h-[60px] px-3 sm:px-4 flex items-center gap-2.5 sm:gap-3 rounded-[14px] transition-all touch-manipulation ${
+                  className={`w-full h-14 sm:h-15 px-3 sm:px-4 flex items-center gap-2.5 sm:gap-3 rounded-[14px] transition-all touch-manipulation ${
                     paymentMethod === "card"
                       ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                       : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
@@ -174,7 +174,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                 <button
                   type="button"
                   onClick={() => setPaymentMethod("wallet")}
-                  className={`w-full h-[56px] sm:h-[60px] px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
+                  className={`w-full h-14 sm:h-15 px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
                     paymentMethod === "wallet"
                       ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                       : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
@@ -207,7 +207,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                     {/* Apple Pay */}
                     <button
                       type="button"
-                      className="flex-1 h-[44px] bg-black rounded-xl flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+                      className="flex-1 h-11 bg-black rounded-xl flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
                     >
                       <Image src="/Applce-Icon.svg" alt="Apple" width={20} height={20} />
                       <span className="text-white text-sm font-medium">Pay</span>
@@ -216,7 +216,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                     {/* Google Pay */}
                     <button
                       type="button"
-                      className="flex-1 h-[44px] bg-white rounded-xl border-2 border-[#2A2A2A] flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
+                      className="flex-1 h-11 bg-white rounded-xl border-2 border-[#2A2A2A] flex items-center justify-center gap-1.5 hover:opacity-90 transition-opacity"
                     >
                       <Image src="/google-Icon.svg" alt="Google" width={15} height={15} />
                       <span className="text-[#939BAA] text-sm font-medium">Pay</span>
@@ -238,19 +238,19 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                     value={formData.cardNumber}
                     onChange={handleInputChange("cardNumber")}
                     placeholder="0000 0000 0000 0000"
-                    className="w-full h-[44px] px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                    className="w-full h-11 px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
                   />
                   {/* Card Icons */}
                   <div className="absolute right-3.5 top-1/2 -translate-y-1/2 flex items-center gap-1">
                     {/* Mastercard Icon */}
-                    <div className="w-[27px] h-[17px] flex items-center justify-center">
+                    <div className="w-6.75 h-4.25 flex items-center justify-center">
                       <div className="flex">
                         <div className="w-3 h-3 rounded-full bg-[#EB001B]" />
                         <div className="w-3 h-3 rounded-full bg-[#F79E1B] -ml-1.5" />
                       </div>
                     </div>
                     {/* Visa Icon */}
-                    <div className="w-[27px] h-[17px] flex items-center justify-center">
+                    <div className="w-6.75 h-4.25 flex items-center justify-center">
                       <span className="text-[#1A1F71] text-[10px] font-bold italic">VISA</span>
                     </div>
                   </div>
@@ -259,7 +259,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
 
               {/* Expiry & CVV Row */}
               <div className="flex gap-2">
-                <div className="flex-1 flex items-center h-[44px] px-3.5 rounded-xl border-2 border-[#2A2A2A] gap-2">
+                <div className="flex-1 flex items-center h-11 px-3.5 rounded-xl border-2 border-[#2A2A2A] gap-2">
                   <input
                     type="text"
                     value={formData.expiryMonth}
@@ -284,7 +284,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                   onChange={handleInputChange("cvv")}
                   placeholder="CVV"
                   maxLength={4}
-                  className="w-24 h-[44px] px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-[#939BAA] text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                  className="w-24 h-11 px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-[#939BAA] text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -298,7 +298,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                   value={formData.email}
                   onChange={handleInputChange("email")}
                   placeholder="johndoe@gmail.com"
-                  className="w-full h-[44px] px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                  className="w-full h-11 px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -312,7 +312,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                   value={formData.nameOnCard}
                   onChange={handleInputChange("nameOnCard")}
                   placeholder="John Appleseed"
-                  className="w-full h-[44px] px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                  className="w-full h-11 px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
                 />
               </div>
 
@@ -326,7 +326,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                   value={formData.address}
                   onChange={handleInputChange("address")}
                   placeholder="123 Main St, New York, NY 10001"
-                  className="w-full h-[44px] px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                  className="w-full h-11 px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-sm placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
                 />
               </div>
             </div>
@@ -380,7 +380,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
             <button
               type="button"
               onClick={handleConfirmPurchase}
-              className="w-full h-[44px] sm:h-[47px] rounded-xl flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] shadow-[0px_3px_13px_rgba(221,65,73,0.30)] hover:opacity-90 transition-opacity touch-manipulation"
+              className="w-full h-11 sm:h-11.75 rounded-xl flex items-center justify-center bg-linear-to-r from-[#B71959] to-[#E04548] shadow-[0px_3px_13px_rgba(221,65,73,0.30)] hover:opacity-90 transition-opacity touch-manipulation"
             >
               <span className="text-white text-sm font-medium">
                 Confirm Purchase of {formatPrice(total)}
@@ -400,7 +400,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                     <button
                       type="button"
                       onClick={() => setSelectedCurrency("USDC")}
-                      className={`flex-1 h-[68px] sm:h-[76px] px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
+                      className={`flex-1 h-17 sm:h-19 px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
                         selectedCurrency === "USDC"
                           ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                           : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
@@ -433,7 +433,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                     <button
                       type="button"
                       onClick={() => setSelectedCurrency("USDT")}
-                      className={`flex-1 h-[68px] sm:h-[76px] px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
+                      className={`flex-1 h-17 sm:h-19 px-3 sm:px-4 flex items-center justify-between rounded-[14px] transition-all touch-manipulation ${
                         selectedCurrency === "USDT"
                           ? "bg-[#E04548]/5 border-2 border-[#E04548]"
                           : "bg-[#1D1D1D] border-2 border-[#2A2A2A]"
@@ -468,7 +468,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                 <div className="flex flex-col gap-2 sm:gap-3 pt-6 sm:pt-8">
                   <button
                     type="button"
-                    className="w-full h-[52px] sm:h-[60px] rounded-[14px] flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] border-2 border-[#2A2A2A] hover:opacity-90 transition-opacity touch-manipulation"
+                    className="w-full h-13 sm:h-15 rounded-[14px] flex items-center justify-center bg-gradient-to-r from-[#B71959] to-[#E04548] border-2 border-[#2A2A2A] hover:opacity-90 transition-opacity touch-manipulation"
                   >
                     <span className="text-white text-sm sm:text-base font-medium">Add Funds</span>
                   </button>
@@ -483,7 +483,7 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
           </div>
 
           {/* Right Side - Order Summary */}
-          <div className="w-full lg:w-[300px] flex flex-col gap-4 sm:gap-5 order-first lg:order-last">
+          <div className="w-full lg:w-75 flex flex-col gap-4 sm:gap-5 order-first lg:order-last">
             {/* Header */}
             <div className="flex justify-between items-center">
               <span className="text-[#939BAA] text-sm sm:text-base font-medium">Order summary</span>
@@ -493,13 +493,13 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
             {/* Pack Item */}
             <div className="flex items-center justify-between p-3 sm:p-3.5 bg-[#1D1D1D] rounded-xl border border-[#2A2A2A]">
               <div className="flex items-center gap-3 sm:gap-3.5">
-                <div className="w-12 h-12 sm:w-[54px] sm:h-[54px] rounded-xl overflow-hidden shadow-[0px_2px_7px_rgba(0,0,0,0.10)] flex items-center justify-center bg-[#3E474C]">
+                <div className="w-12 h-12 sm:w-13.5 sm:h-13.5 rounded-xl overflow-hidden shadow-[0px_2px_7px_rgba(0,0,0,0.10)] flex items-center justify-center bg-[#3E474C]">
                   <Image
                     src={pack.image}
                     alt={pack.name}
                     width={37}
                     height={50}
-                    className="object-contain w-8 h-10 sm:w-[37px] sm:h-[50px]"
+                    className="object-contain w-8 h-10 sm:w-9.25 sm:h-12.5"
                   />
                 </div>
                 <div className="flex flex-col">
@@ -529,11 +529,11 @@ export default function PurchaseModal({ isOpen, onClose, pack }: PurchaseModalPr
                 value={formData.promoCode}
                 onChange={handleInputChange("promoCode")}
                 placeholder="Enter promo code"
-                className="flex-1 min-w-0 h-[44px] px-3 sm:px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-xs sm:text-[13px] placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
+                className="flex-1 min-w-0 h-11 px-3 sm:px-3.5 bg-transparent rounded-xl border-2 border-[#2A2A2A] text-white text-xs sm:text-[13px] placeholder:text-[#939BAA] focus:border-[#E04548] focus:outline-none transition-colors"
               />
               <button
                 type="button"
-                className="flex-shrink-0 w-[70px] sm:w-[75px] h-[44px] rounded-xl bg-gradient-to-r from-[#B71959] to-[#E04548] text-white text-xs sm:text-[13px] font-medium hover:opacity-90 transition-opacity touch-manipulation"
+                className="shrink-0 w-17.5 sm:w-18.75 h-11 rounded-xl bg-linear-to-r from-[#B71959] to-[#E04548] text-white text-xs sm:text-[13px] font-medium hover:opacity-90 transition-opacity touch-manipulation"
               >
                 Apply
               </button>
